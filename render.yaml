@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: rising-waters-flood-prediction
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python train.py
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: "False"
+      - key: PORT
+        value: "10000"
+      - key: SECRET_KEY
+        generateValue: true
